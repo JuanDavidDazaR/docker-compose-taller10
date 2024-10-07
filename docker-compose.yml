@@ -8,9 +8,7 @@ services:
       - MYSQL_ROOT_PASSWORD=mysql
       - MYSQL_DATABASE=productoDB
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
-    #networks:
-      #- microservices-net
+      - ./db/productodb/:/docker-entrypoint-initdb.d
 
   usuarioDB:
     image: mysql:5.7
@@ -21,9 +19,7 @@ services:
       - MYSQL_ROOT_PASSWORD=mysql
       - MYSQL_DATABASE=usuarioDB
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
-    #networks:
-      #- microservices-net
+      - ./db/usuariodb/:/docker-entrypoint-initdb.d
 
   ordenDB:
     image: mysql:5.7
@@ -34,9 +30,7 @@ services:
       - MYSQL_ROOT_PASSWORD=mysql
       - MYSQL_DATABASE=ordenDB
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
-    #networks:
-      #- microservices-net
+      - ./db/ordendb/:/docker-entrypoint-initdb.d
 
   usuarios:
     build: ./microservicios/usuarios
@@ -45,10 +39,6 @@ services:
       - "3001:3001"
     links:
       - usuarioDB
-    #depends_on:
-      - usuarioDB
-    #networks:
-      #- microservices-net
 
   productos:
     build: ./microservicios/productos
@@ -57,10 +47,6 @@ services:
       - "3002:3002"
     links:
       - productoDB
-    #depends_on:
-      - productoDB
-    #networks:
-      #- microservices-net
 
   ordenes:
     build: ./microservicios/ordenes
@@ -72,11 +58,6 @@ services:
       - usuarioDB
       - usuarios
       - productos
-    #depends_on:
-      - productoDB
-      - usuarioDB
-    #networks:
-      #- microservices-net
 
   web:
     build: ./web
@@ -87,11 +68,4 @@ services:
       - usuarios
       - productos
       - ordenes
-    #networks:
-      #- microservices-net
-
-# Define la red común para todos los servicios
-#networks:
-  #microservices-net:
-    #driver: bridge
 
