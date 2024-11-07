@@ -92,3 +92,10 @@ end
 
 end
 ```
+
+Este Vagrantfile define dos máquinas virtuales, una llamada servidorUbuntu con dirección ip 192.168.100.3 y la otra llamada clienteUbuntu con dirección ip 192.168.100.4, ambas instanciadas desde un box en el repositorio de bento llamado bento/Ubuntu-22.04. 
+
+Crear las máquinas virtuales mediante el comando vagrant up desde la consola de Windows.
+```
+vagrant up 
+```
